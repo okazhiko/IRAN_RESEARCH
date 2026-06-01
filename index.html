@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iran Energy Report Archive</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7f4;
+      --paper: #ffffff;
+      --ink: #1d2430;
+      --muted: #606976;
+      --line: #d7dce2;
+      --accent: #1f6f78;
+      --accent-soft: #e8f3f4;
+      --danger-soft: #fff5e3;
+      --shadow: 0 1px 6px rgba(20, 30, 40, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.65;
+      letter-spacing: 0;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 28px max(24px, calc((100vw - 1120px) / 2));
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 24px auto 56px;
+    }
+    section {
+      margin: 0 0 24px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    h2 {
+      margin: 0 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .month-control, .date-control {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    button, input {
+      font: inherit;
+    }
+    button, .report-link {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 8px 11px;
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button:hover, .report-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    input[type="month"], input[type="date"] {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+      min-height: 38px;
+    }
+    .calendar {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .calendar-header, .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+    .weekday {
+      padding: 9px 6px;
+      background: #f0f4f5;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .weekday:last-child { border-right: 0; }
+    .day {
+      min-height: 96px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      padding: 10px;
+      background: #fff;
+      text-align: left;
+      cursor: default;
+    }
+    .day:nth-child(7n) { border-right: 0; }
+    .day.is-outside {
+      background: #fafafa;
+      color: #a0a7b0;
+    }
+    .day.is-today {
+      box-shadow: inset 0 0 0 2px var(--accent);
+    }
+    .day.has-report {
+      cursor: pointer;
+      background: var(--accent-soft);
+    }
+    .day.has-report:hover {
+      color: var(--accent);
+      box-shadow: inset 0 0 0 2px var(--accent);
+    }
+    .day.no-report {
+      background: #fff;
+    }
+    .day-number {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .day-status {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .has-report .day-status {
+      color: #254a50;
+      font-weight: 700;
+    }
+    .status {
+      min-height: 22px;
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .status.is-warning {
+      display: inline-block;
+      background: var(--danger-soft);
+      border-left: 4px solid #b56b00;
+      color: #6d4300;
+      padding: 8px 10px;
+    }
+    .latest-area {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .report-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+    }
+    @media (max-width: 760px) {
+      header { padding: 22px 16px; }
+      header h1 { font-size: 23px; }
+      main { width: calc(100vw - 20px); margin-top: 10px; }
+      section { padding: 16px; border-radius: 6px; }
+      .toolbar { align-items: stretch; }
+      .month-control, .date-control { width: 100%; }
+      input[type="month"], input[type="date"] { flex: 1 1 150px; min-width: 0; }
+      .day { min-height: 72px; padding: 8px; }
+      .day-number { font-size: 16px; }
+      .day-status { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Iran Energy Report Archive</h1>
+    <p>カレンダーから日付を選択して、該当日のHTMLレポートを開きます。</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="calendar-title">
+      <h2 id="calendar-title">レポートカレンダー</h2>
+
+      <div class="toolbar">
+        <div class="month-control" aria-label="表示月の操作">
+          <button type="button" id="prev-month">前月</button>
+          <input type="month" id="month-picker" aria-label="表示する月">
+          <button type="button" id="next-month">翌月</button>
+        </div>
+        <div class="date-control" aria-label="日付指定">
+          <input type="date" id="date-picker" aria-label="開くレポート日">
+          <button type="button" id="open-date">開く</button>
+        </div>
+      </div>
+
+      <div class="calendar" aria-live="polite">
+        <div class="calendar-header" aria-hidden="true">
+          <div class="weekday">日</div>
+          <div class="weekday">月</div>
+          <div class="weekday">火</div>
+          <div class="weekday">水</div>
+          <div class="weekday">木</div>
+          <div class="weekday">金</div>
+          <div class="weekday">土</div>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </div>
+
+      <p class="status" id="status"></p>
+      <div class="latest-area">
+        <button type="button" id="latest-report">最新レポートを探す</button>
+        <a class="report-link" id="latest-link" href="#" hidden>最新レポートを開く</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const grid = document.querySelector("#calendar-grid");
+      const monthPicker = document.querySelector("#month-picker");
+      const datePicker = document.querySelector("#date-picker");
+      const status = document.querySelector("#status");
+      const latestLink = document.querySelector("#latest-link");
+      const reportCache = new Map();
+      const today = new Date();
+
+      const pad2 = (value) => String(value).padStart(2, "0");
+      const toDateKey = (date) => `${date.getFullYear()}${pad2(date.getMonth() + 1)}${pad2(date.getDate())}`;
+      const toInputDate = (date) => `${date.getFullYear()}-${pad2(date.getMonth() + 1)}-${pad2(date.getDate())}`;
+      const toMonthValue = (date) => `${date.getFullYear()}-${pad2(date.getMonth() + 1)}`;
+      const reportUrl = (date) => {
+        const key = toDateKey(date);
+        return `/results/${key}/report_${key}.html`;
+      };
+      const sameDate = (a, b) =>
+        a.getFullYear() === b.getFullYear() &&
+        a.getMonth() === b.getMonth() &&
+        a.getDate() === b.getDate();
+
+      const setStatus = (message, warning = false) => {
+        status.textContent = message;
+        status.classList.toggle("is-warning", warning);
+      };
+
+      const reportExists = async (date) => {
+        const key = toDateKey(date);
+        if (reportCache.has(key)) return reportCache.get(key);
+        const url = reportUrl(date);
+        try {
+          const response = await fetch(url, { method: "HEAD", cache: "no-store" });
+          const exists = response.ok;
+          reportCache.set(key, exists);
+          return exists;
+        } catch {
+          reportCache.set(key, false);
+          return false;
+        }
+      };
+
+      const openReport = async (date) => {
+        setStatus("レポートを確認しています。");
+        if (await reportExists(date)) {
+          window.location.href = reportUrl(date);
+          return;
+        }
+        setStatus(`${toInputDate(date)} のレポートはまだ公開されていません。`, true);
+      };
+
+      const renderCalendar = async () => {
+        const [year, month] = monthPicker.value.split("-").map(Number);
+        const firstDay = new Date(year, month - 1, 1);
+        const gridStart = new Date(firstDay);
+        gridStart.setDate(firstDay.getDate() - firstDay.getDay());
+        grid.innerHTML = "";
+        setStatus("レポート有無を確認しています。");
+
+        for (let i = 0; i < 42; i += 1) {
+          const date = new Date(gridStart);
+          date.setDate(gridStart.getDate() + i);
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "day";
+          button.dataset.date = toInputDate(date);
+          if (date.getMonth() !== month - 1) button.classList.add("is-outside");
+          if (sameDate(date, today)) button.classList.add("is-today");
+          button.innerHTML = `<span class="day-number">${date.getDate()}</span><span class="day-status">確認中</span>`;
+          button.addEventListener("click", () => openReport(date));
+          grid.append(button);
+        }
+
+        const checks = Array.from(grid.querySelectorAll(".day")).map(async (button) => {
+          const date = new Date(`${button.dataset.date}T00:00:00`);
+          const statusText = button.querySelector(".day-status");
+          if (await reportExists(date)) {
+            button.classList.add("has-report");
+            statusText.textContent = "レポートあり";
+            button.setAttribute("aria-label", `${button.dataset.date} のレポートを開く`);
+          } else {
+            button.classList.add("no-report");
+            statusText.textContent = "未公開";
+            button.setAttribute("aria-label", `${button.dataset.date} は未公開`);
+          }
+        });
+        await Promise.all(checks);
+        setStatus("日付を選択すると、公開済みレポートへ移動します。");
+      };
+
+      const moveMonth = (delta) => {
+        const [year, month] = monthPicker.value.split("-").map(Number);
+        const next = new Date(year, month - 1 + delta, 1);
+        monthPicker.value = toMonthValue(next);
+        renderCalendar();
+      };
+
+      const findLatestReport = async () => {
+        setStatus("最新レポートを探しています。");
+        latestLink.hidden = true;
+        const cursor = new Date(today);
+        for (let i = 0; i < 180; i += 1) {
+          if (await reportExists(cursor)) {
+            latestLink.href = reportUrl(cursor);
+            latestLink.textContent = `${toInputDate(cursor)} の最新レポートを開く`;
+            latestLink.hidden = false;
+            setStatus(`${toInputDate(cursor)} のレポートが最新です。`);
+            return;
+          }
+          cursor.setDate(cursor.getDate() - 1);
+        }
+        setStatus("過去180日以内に公開済みレポートを確認できませんでした。", true);
+      };
+
+      document.querySelector("#prev-month").addEventListener("click", () => moveMonth(-1));
+      document.querySelector("#next-month").addEventListener("click", () => moveMonth(1));
+      document.querySelector("#open-date").addEventListener("click", () => {
+        if (!datePicker.value) {
+          setStatus("日付を指定してください。", true);
+          return;
+        }
+        openReport(new Date(`${datePicker.value}T00:00:00`));
+      });
+      document.querySelector("#latest-report").addEventListener("click", findLatestReport);
+      monthPicker.addEventListener("change", renderCalendar);
+
+      monthPicker.value = toMonthValue(today);
+      datePicker.value = toInputDate(today);
+      renderCalendar();
+      findLatestReport();
+    })();
+  </script>
+</body>
+</html>
