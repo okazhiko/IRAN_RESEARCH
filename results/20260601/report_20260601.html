@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iran Energy Report 2026-06-01</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7f4;
+      --paper: #ffffff;
+      --ink: #1d2430;
+      --muted: #606976;
+      --line: #d7dce2;
+      --accent: #1f6f78;
+      --accent-soft: #e8f3f4;
+      --warn: #8a5a00;
+      --shadow: 0 1px 6px rgba(20, 30, 40, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.65;
+      letter-spacing: 0;
+    }
+    header {
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 28px max(24px, calc((100vw - 1120px) / 2));
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.25;
+    }
+    header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+    nav a, .tool-button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 6px;
+      padding: 7px 10px;
+      font-size: 13px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    nav a:hover, .tool-button:hover { border-color: var(--accent); color: var(--accent); }
+    main {
+      width: min(1120px, calc(100vw - 32px));
+      margin: 24px auto 56px;
+    }
+    section {
+      margin: 0 0 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+    h2 {
+      margin: 0 0 18px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent);
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    h3 {
+      margin: 24px 0 12px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+    figure {
+      margin: 0 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    figcaption {
+      padding: 9px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      background: #fafafa;
+    }
+    .area-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .note {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 10px 12px;
+      margin: 12px 0 16px;
+      color: #254a50;
+      font-size: 14px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin: 12px 0 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 820px;
+      background: #fff;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 9px 10px;
+      text-align: right;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    th:first-child, td:first-child { text-align: left; }
+    th {
+      background: #f0f4f5;
+      font-weight: 700;
+    }
+    tr:last-child td { border-bottom: 0; }
+    th:last-child, td:last-child { border-right: 0; }
+    ul { padding-left: 1.2rem; }
+    li { margin: 0 0 12px; }
+    a { color: var(--accent); }
+    .source {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .warning {
+      color: var(--warn);
+      font-weight: 600;
+    }
+    .top-link {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      display: none;
+      background: var(--accent);
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 13px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+    .top-link.is-visible { display: block; }
+    @media (max-width: 760px) {
+      header { padding: 22px 16px; }
+      header h1 { font-size: 23px; }
+      main { width: calc(100vw - 20px); margin-top: 10px; }
+      section { padding: 16px; border-radius: 6px; }
+      .area-grid { grid-template-columns: 1fr; }
+      th, td { font-size: 13px; padding: 8px; }
+    }
+    @media print {
+      body { background: #fff; }
+      header, section { box-shadow: none; }
+      nav, .tool-button, .top-link { display: none !important; }
+      main { width: 100%; margin: 0; }
+      section { break-inside: avoid; border: 0; padding: 10px 0; }
+      figure { break-inside: avoid; }
+      a { color: #000; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header id="top">
+    <h1>Iran Energy Report</h1>
+    <p>作成日: 2026-06-01 / データ: Merged.csv / 出力形式: HTML</p>
+    <nav aria-label="ページ内ナビゲーション">
+      <a href="#long-term">長期トレンド</a>
+      <a href="#short-term">短期トレンド</a>
+      <a href="#news">ニュース</a>
+      <a href="#insight">インサイト</a>
+      <button class="tool-button" type="button" onclick="window.print()">印刷</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="long-term">
+      <h2>長期トレンド</h2>
+
+      <h3>JKMとJEPXシステムプライスの推移グラフ</h3>
+      <figure>
+        <img src="./20260601_jepx_system_lng.png" alt="JKMとJEPXシステムプライスの長期推移グラフ" loading="lazy">
+        <figcaption>JKMとJEPXシステムプライスの長期推移</figcaption>
+      </figure>
+
+      <h3>WTIの推移グラフ</h3>
+      <figure>
+        <img src="./20260601_oil.png" alt="WTIの長期推移グラフ" loading="lazy">
+        <figcaption>WTIの長期推移</figcaption>
+      </figure>
+
+      <h3>JEPXエリアプライスグラフ（直近一年分）</h3>
+      <div class="area-grid">
+        <figure>
+          <img src="./20260601_jepx_hokkaido.png" alt="北海道エリアプライスグラフ" loading="lazy">
+          <figcaption>北海道</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_tohoku.png" alt="東北エリアプライスグラフ" loading="lazy">
+          <figcaption>東北</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_tokyo.png" alt="東京エリアプライスグラフ" loading="lazy">
+          <figcaption>東京</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_chubu.png" alt="中部エリアプライスグラフ" loading="lazy">
+          <figcaption>中部</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_hokuriku.png" alt="北陸エリアプライスグラフ" loading="lazy">
+          <figcaption>北陸</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_kansai.png" alt="関西エリアプライスグラフ" loading="lazy">
+          <figcaption>関西</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_chugoku.png" alt="中国エリアプライスグラフ" loading="lazy">
+          <figcaption>中国</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_shikoku.png" alt="四国エリアプライスグラフ" loading="lazy">
+          <figcaption>四国</figcaption>
+        </figure>
+        <figure>
+          <img src="./20260601_jepx_kyushu.png" alt="九州エリアプライスグラフ" loading="lazy">
+          <figcaption>九州</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="short-term">
+      <h2>短期トレンド</h2>
+
+      <h3>JKMとJEPXシステムプライスの推移グラフ</h3>
+      <figure>
+        <img src="./20260601_jepx_system_lng_from_20260101.png" alt="JKMとJEPXシステムプライスの短期推移グラフ" loading="lazy">
+        <figcaption>2026年初来のJKMとJEPXシステムプライス推移</figcaption>
+      </figure>
+
+      <h3>WTIの推移グラフ</h3>
+      <figure>
+        <img src="./20260601_oil_from_20260101.png" alt="WTIの短期推移グラフ" loading="lazy">
+        <figcaption>2026年初来のWTI推移</figcaption>
+      </figure>
+
+      <h3>JEPXシステムプライス</h3>
+      <div class="note">
+        JEPXは受渡日ベースの最新非空値で評価しています。最新値は <strong>2026-06-01</strong> 分です。先週終値は <strong>2026-05-25</strong> 時点の直近値、先月終値は <strong>2026-05-31</strong> 時点の直近値で評価しています。
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>エリア</th>
+              <th>当日価格</th>
+              <th>前日価格</th>
+              <th>前日比（％）</th>
+              <th>先週終値</th>
+              <th>先週比（％）</th>
+              <th>先月終値</th>
+              <th>先月比（％）</th>
+              <th>過去最高値</th>
+              <th>最高値比（％）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>システム</td><td>18.25</td><td>12.10</td><td>50.83</td><td>17.27</td><td>5.67</td><td>12.10</td><td>50.83</td><td>64.06</td><td>-71.51</td></tr>
+            <tr><td>北海道</td><td>14.20</td><td>11.38</td><td>24.78</td><td>14.58</td><td>-2.61</td><td>11.38</td><td>24.78</td><td>73.92</td><td>-80.79</td></tr>
+            <tr><td>東北</td><td>18.69</td><td>14.64</td><td>27.66</td><td>17.14</td><td>9.04</td><td>14.64</td><td>27.66</td><td>84.92</td><td>-77.99</td></tr>
+            <tr><td>東京</td><td>23.55</td><td>21.65</td><td>8.78</td><td>21.59</td><td>9.08</td><td>21.65</td><td>8.78</td><td>86.13</td><td>-72.66</td></tr>
+            <tr><td>中部</td><td>20.74</td><td>15.25</td><td>36.00</td><td>20.11</td><td>3.13</td><td>15.25</td><td>36.00</td><td>52.06</td><td>-60.16</td></tr>
+            <tr><td>北陸</td><td>18.07</td><td>10.56</td><td>71.12</td><td>16.85</td><td>7.24</td><td>10.56</td><td>71.12</td><td>46.48</td><td>-61.13</td></tr>
+            <tr><td>関西</td><td>18.07</td><td>10.56</td><td>71.12</td><td>16.85</td><td>7.24</td><td>10.56</td><td>71.12</td><td>46.48</td><td>-61.13</td></tr>
+            <tr><td>中国</td><td>11.08</td><td>7.66</td><td>44.65</td><td>14.65</td><td>-24.37</td><td>7.66</td><td>44.65</td><td>46.48</td><td>-76.16</td></tr>
+            <tr><td>四国</td><td>2.57</td><td>1.74</td><td>47.70</td><td>1.48</td><td>73.65</td><td>1.74</td><td>47.70</td><td>46.48</td><td>-94.47</td></tr>
+            <tr><td>九州</td><td>11.08</td><td>7.20</td><td>53.89</td><td>12.60</td><td>-12.06</td><td>7.20</td><td>53.89</td><td>40.54</td><td>-72.67</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>LNG先物価格</h3>
+      <div class="note">
+        最新値は <strong>2026-05-29</strong> の <strong>LNG(close)</strong> です。先週終値は <strong>2026-05-22</strong> 時点の直近値、先月終値は <strong>2026-04-30</strong> 時点の直近値で評価しています。
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>当日価格</th>
+              <th>前日価格</th>
+              <th>前日比（％）</th>
+              <th>先週終値</th>
+              <th>先週比（％）</th>
+              <th>先月終値</th>
+              <th>先月比（％）</th>
+              <th>過去最高値</th>
+              <th>最高値比（％）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>2826.00</td><td>2827.00</td><td>-0.04</td><td>2888.00</td><td>-2.15</td><td>2874.00</td><td>-1.67</td><td>10319.00</td><td>-72.61</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>石油先物価格</h3>
+      <div class="note">
+        最新値は <strong>2026-05-29</strong> の <strong>OIL(close)</strong> です。先週終値は <strong>2026-05-22</strong> 時点の直近値、先月終値は <strong>2026-04-30</strong> 時点の直近値で評価しています。
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>当日価格</th>
+              <th>前日価格</th>
+              <th>前日比（％）</th>
+              <th>先週終値</th>
+              <th>先週比（％）</th>
+              <th>先月終値</th>
+              <th>先月比（％）</th>
+              <th>過去最高値</th>
+              <th>最高値比（％）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>87.36</td><td>88.90</td><td>-1.73</td><td>96.60</td><td>-9.57</td><td>105.07</td><td>-16.86</td><td>123.70</td><td>-29.38</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="news">
+      <h2>ニュース</h2>
+
+      <h3>イラン情勢に関するニュース</h3>
+      <ul>
+        <li>
+          過去24時間で、米イラン協議に関するAP/Reuters級の強い新規報道は確認できませんでした。直近では2026年5月29日、APが、トランプ大統領は停戦延長とホルムズ海峡再開を含む合意を進めるかまだ決めていないと報じています。
+          <span class="source">参照: <a href="https://apnews.com/article/cac5206df0f0c7b79fe9321c08d63096" target="_blank" rel="noopener noreferrer">AP, 2026-05-29</a></span>
+        </li>
+        <li>
+          2026年5月29日、Reutersは、米イランが60日間の停戦延長とホルムズ海峡の通航制限解除で合意に達したものの、トランプ大統領の最終承認待ちで、イラン側の最終確認も得られていないと報じました。
+          <span class="source">参照: <a href="https://au.investing.com/news/world-news/iran-and-us-agree-plan-for-60day-ceasefire-extension-after-latest-attacks-4460861" target="_blank" rel="noopener noreferrer">Reuters/Investing.com, 2026-05-29</a></span>
+        </li>
+      </ul>
+
+      <h3>ホルムズ海峡経由の石油・LNGに関するニュース</h3>
+      <ul>
+        <li>
+          過去24時間で、ホルムズ海峡経由の石油・LNG輸送に関する強い新規報道は確認できませんでした。直近のReuters報道では、合意案は無制限の通航、米国のイラン港湾封鎖解除、一部石油制裁緩和を含むとされています。
+          <span class="source">参照: <a href="https://au.investing.com/news/world-news/iran-and-us-agree-plan-for-60day-ceasefire-extension-after-latest-attacks-4460861" target="_blank" rel="noopener noreferrer">Reuters/Investing.com, 2026-05-29</a></span>
+        </li>
+        <li>
+          2026年5月29日のAP報道では、ホルムズ海峡再開は引き続き米政権内の判断待ちであり、即時の全面正常化は確認されていません。原油・LNGのリスクプレミアムは低下傾向ですが、通航実績の回復が次の確認点です。
+          <span class="source">参照: <a href="https://apnews.com/article/cac5206df0f0c7b79fe9321c08d63096" target="_blank" rel="noopener noreferrer">AP, 2026-05-29</a></span>
+        </li>
+      </ul>
+
+      <h3>ホルムズ海峡経由でない石油・LNGに関するニュース</h3>
+      <ul>
+        <li>
+          過去24時間で、日本向けの非ホルムズ新規大型調達に関する強い追加報道は確認できませんでした。直近では2026年5月27日、S&amp;P GlobalがJERAは豪州Ichthys LNGのストライキリスクを吸収可能と見ていると報じています。
+          <span class="source">参照: <a href="https://www.spglobal.com/energy/en/news-research/latest-news/lng/052726-interview-jera-can-absorb-potential-ichthys-lng-strike-may-cut-australia-supply-reliance" target="_blank" rel="noopener noreferrer">S&amp;P Global, 2026-05-27</a></span>
+        </li>
+        <li>
+          JOGMECの2026年5月LNG月次では、米イラン和平交渉進展への期待でJKMが下落した一方、ホルムズ封鎖継続や豪州Ichthys LNGのストライキ懸念が月後半の上昇要因になったと整理されています。
+          <span class="source">参照: <a href="https://journal.jogmec.go.jp/oilgas/nglng/monthly-report/202605.html" target="_blank" rel="noopener noreferrer">JOGMEC, 2026年5月LNG月次</a></span>
+        </li>
+      </ul>
+
+      <h3>日本国内のイラン戦争に関係するニュース</h3>
+      <ul>
+        <li>
+          過去24時間で、JEPX制度や国内電力市場制度を直接変更する新規の強い発表は確認できませんでした。直近の国内対策として、経済産業省は2026年5月26日に、7月から9月の電気・ガス料金支援と夏季省エネ呼びかけを説明しています。
+          <span class="source">参照: <a href="https://www.meti.go.jp/speeches/kaiken/2026/20260526001.html" target="_blank" rel="noopener noreferrer">経済産業省, 2026-05-26</a></span>
+        </li>
+        <li>
+          経済産業省は、現時点では原油やLNGの量は確保できており、従来以上に踏み込んだ節約を求める段階ではないと説明しています。国内小売料金支援は家計負担を抑えますが、JEPX卸価格を直接下げる施策ではありません。
+          <span class="source">参照: <a href="https://www.meti.go.jp/speeches/kaiken/2026/20260526001.html" target="_blank" rel="noopener noreferrer">経済産業省, 2026-05-26</a></span>
+        </li>
+      </ul>
+    </section>
+
+    <section id="insight">
+      <h2>インサイト</h2>
+
+      <h3>ニュース事項による日本の電力市場への影響（短期：数日〜1週間）</h3>
+      <ul>
+        <li>JEPXシステムプライスは <strong>18.25</strong> 円/kWhで前日比 <strong>50.83%</strong> と反発しました。OILは <strong>87.36</strong> と前日比 <strong>-1.73%</strong>、先週比 <strong>-9.57%</strong> まで下がっており、燃料価格よりも月初の需給・エリア要因が短期価格を押し上げています。</li>
+        <li>東京は <strong>23.55</strong>、中部は <strong>20.74</strong> と高く、四国は <strong>2.57</strong> にとどまります。ホルムズ再開協議は燃料心理を冷やしますが、通航実績の回復が確認されるまでは、数日から1週間のJEPXはエリア差が残りやすいです。</li>
+        <li>LNGは <strong>2826.00</strong> と前日比 <strong>-0.04%</strong>、先週比 <strong>-2.15%</strong> です。非ホルムズの豪州LNGリスクは大きく悪化していませんが、Ichthysの労務リスクや豪州政策リスクは、短期のJKM下押しを限定する材料です。</li>
+      </ul>
+
+      <h3>ニュース事項による日本の電力市場への影響（長期：1ヶ月〜半年）</h3>
+      <ul>
+        <li>米イラン合意が承認され、ホルムズ海峡の通航制限解除が実行されれば、OILの先月比 <strong>-16.86%</strong> という低下は火力燃料費の上振れ圧力を弱めます。ただし、過去24時間で新たな承認・履行報道はなく、現時点では期待先行です。</li>
+        <li>システム価格は過去最高値比では <strong>-71.51%</strong> ですが、前日比・先月比では <strong>50.83%</strong> 上昇しています。燃料価格が下がっても、夏季需要と地域別需給が重なると、卸価格は燃料低下ほど素直には下がりません。</li>
+        <li>国内の電気・ガス料金支援は小売負担を抑えますが、JEPXの卸価格や発電燃料調達コストを直接下げるものではありません。1ヶ月から半年では、ホルムズ正常化の履行状況、豪州LNGの供給安定性、東京・中部など高値エリアの需給を分けて監視する必要があります。</li>
+      </ul>
+    </section>
+  </main>
+
+  <button class="top-link" type="button" aria-label="ページ上部へ戻る">上へ</button>
+  <script>
+    (() => {
+      const topButton = document.querySelector(".top-link");
+      const updateButton = () => {
+        topButton.classList.toggle("is-visible", window.scrollY > 500);
+      };
+      topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+      window.addEventListener("scroll", updateButton, { passive: true });
+      updateButton();
+    })();
+  </script>
+</body>
+</html>
